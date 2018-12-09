@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource()
@@ -19,6 +20,13 @@ class Contact
     private $id;
 
     /**
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 100,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
+     * 
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -29,6 +37,11 @@ class Contact
     private $phone_number;
 
     /**
+     * @Assert\Length(
+     *      max = 10,
+     *      maxMessage = "Your message cannot be longer than {{ limit }} characters"
+     * )
+     * 
      * @ORM\Column(type="text")
      */
     private $message;
